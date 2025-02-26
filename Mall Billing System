@@ -65,3 +65,34 @@ print(f"Final Amount: ₹{total_bill:.2f}")
 print(f"Payment Method: {payment_method}")
 print("=============================")
 print("Thank you for shopping! 😊")
+
+==============================================================================================================================================================================================
+
+Output:
+
+Enter the number of items: 2
+Enter name of item 1: Shoes
+Enter quantity of Shoes: 2
+Enter price of Shoes (per unit): 1000
+Enter name of item 2: Shirt
+Enter quantity of Shirt: 1
+Enter price of Shirt (per unit): 500
+Are you a premium member? (yes/no): yes
+
+Payment Methods: 1) Cash  2) Card  3) UPI
+Choose payment method (1/2/3): 2
+
+========== BILL RECEIPT ==========
+Item        Qty    Price   Total
+-----------------------------------
+Shoes       2      ₹1000.00   ₹2000.00
+Shirt       1      ₹500.00    ₹500.00
+-----------------------------------
+Subtotal: ₹2500.00
+Discount Applied: ₹875.00
+GST (5%): ₹80.00
+Final Amount: ₹1705.00
+Payment Method: Card
+===================================
+Thank you for shopping with us! 😊
+
