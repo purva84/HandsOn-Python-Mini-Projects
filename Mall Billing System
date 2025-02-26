@@ -1,0 +1,67 @@
+# Take user name
+username = input("Name: ")
+
+# Take input for number of items
+no_of_items = int(input("\nTotal items: "))
+
+# Initialize total bill and item list
+bill = 0
+items = []  # List to store item details
+
+# Loop through each item
+for item in range(1, no_of_items + 1):
+    item_name = input("\nItem name: ")
+    quantity = int(input("Quantity: "))
+    price = float(input("Price: "))
+
+    amt = quantity * price  # Calculate amount for this item
+    bill += amt  # Add to total bill
+
+    # Store item details in a dictionary and add to list
+    items.append({"name": item_name, "quantity": quantity, "price": price, "total": amt})
+
+# Apply Discount
+discount = 0
+if bill > 1000:
+    discount = (bill / 100) * 20
+elif bill > 500:
+    discount = (bill / 100) * 10
+
+# Ask for Premium Membership
+premium = input("Do you have premium? (yes/no): ").lower()
+if premium == "yes":
+    discount = (bill / 100) * 15  # Extra 15% discount for premium members
+
+# Final Bill Calculation
+total_bill = bill - discount
+
+# Payment Method
+pay = int(input("Payment methods: 1) Cash  2) Card  3) UPI: "))
+
+# Payment method selection
+payment_method = ""
+if pay == 1:
+    payment_method = "Cash"
+elif pay == 2:
+    payment_method = "Card"
+elif pay == 3:
+    payment_method = "UPI"
+else:
+    payment_method = "Unknown"
+
+# Print Receipt
+print("\n====== BILL RECEIPT ======")
+print("Item\tQty\tPrice\tTotal")
+print("-----------------------------")
+
+# Loop through items and print details
+for item in items:
+    print(f"{item['name']}\t{item['quantity']}\t₹{item['price']:.2f}\t₹{item['total']:.2f}")
+
+print("-----------------------------")
+print(f"Subtotal: ₹{bill:.2f}")
+print(f"Discount: ₹{discount:.2f}")
+print(f"Final Amount: ₹{total_bill:.2f}")
+print(f"Payment Method: {payment_method}")
+print("=============================")
+print("Thank you for shopping! 😊")
