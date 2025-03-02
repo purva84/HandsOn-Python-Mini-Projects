@@ -3,17 +3,17 @@ task = []
 print("📌 To-Do List Manager")
 
 while True:
-    print("\nChoose an option: \n 1) Add Task\t2) Remove Task\t3) Clear All Tasks\t4) Sort Tasks Alphabetically\t5) Exit\t6) View Tasks")
+    print("\nChoose an option: \n 1) Add Task\t2) Remove Task\t3) Clear All Tasks\t4) Sort Tasks Alphabetically\t5)View Tasks \t6)Exit ")
     option = input("Enter your option: ")
 
     if option == "1":
-        task_name = input("Enter your task: ")
+        task_name = input("Enter your task: ").lower()
         task.append(task_name)
         print(f"✅ '{task_name}' has been added to your to-do list!")
 
     elif option == "2":
-        if task:  # Check if list is not empty
-            remove_task = input("Which task do you want to remove? ")
+        if task:  # In Python, an empty list is considered False, and a non-empty list is True. If the list is empty, we skip the removal process and show a warning.
+            remove_task = input("Which task do you want to remove? ").lower()
             if remove_task in task:
                 task.remove(remove_task)
                 print(f"❌ '{remove_task}' has been removed!")
@@ -26,24 +26,27 @@ while True:
         task.clear()
         print("🗑️ Your to-do list is now empty!")
 
-    elif option == "4":
-        if task:
-            task.sort()
-            print("🔄 Your tasks have been sorted alphabetically!")
-        else:
-            print("⚠️ No tasks to sort!")
+    elif option == "4":  
+    if task:  
+        task.sort()  
+        print("🔄 Your tasks have been sorted alphabetically!")  
+        print("\n📜 Sorted To-Do List:")  
+        for idx, t in enumerate(task, start=1):  
+            print(f"{idx}. {t}")  # Display sorted tasks  
+    else:  
+        print("⚠️ No tasks to sort!")  
 
-    elif option == "5":
-        print("👋 Exiting the To-Do List Manager. See you next time!")
-        break  # Exit the loop
-
-    elif option == "6":  # View Tasks
+    elif option == "5":  # View Tasks
         if task:
             print("\n📝 Your To-Do List:")
             for idx, t in enumerate(task, start=1):
                 print(f"{idx}. {t}")
         else:
             print("📭 No tasks yet! Add some tasks first.")
+
+    elif option == "6":
+        print("👋 Exiting the To-Do List Manager. See you next time!")
+        break  # Exit the loop
 
     else:
         print("❌ Invalid option! Please enter a number between 1 and 6.")
