@@ -1,0 +1,49 @@
+task = []
+
+print("📌 To-Do List Manager")
+
+while True:
+    print("\nChoose an option: \n 1) Add Task\t2) Remove Task\t3) Clear All Tasks\t4) Sort Tasks Alphabetically\t5) Exit\t6) View Tasks")
+    option = input("Enter your option: ")
+
+    if option == "1":
+        task_name = input("Enter your task: ")
+        task.append(task_name)
+        print(f"✅ '{task_name}' has been added to your to-do list!")
+
+    elif option == "2":
+        if task:  # Check if list is not empty
+            remove_task = input("Which task do you want to remove? ")
+            if remove_task in task:
+                task.remove(remove_task)
+                print(f"❌ '{remove_task}' has been removed!")
+            else:
+                print("⚠️ Task not found!")
+        else:
+            print("⚠️ Your to-do list is empty!")
+
+    elif option == "3":
+        task.clear()
+        print("🗑️ Your to-do list is now empty!")
+
+    elif option == "4":
+        if task:
+            task.sort()
+            print("🔄 Your tasks have been sorted alphabetically!")
+        else:
+            print("⚠️ No tasks to sort!")
+
+    elif option == "5":
+        print("👋 Exiting the To-Do List Manager. See you next time!")
+        break  # Exit the loop
+
+    elif option == "6":  # View Tasks
+        if task:
+            print("\n📝 Your To-Do List:")
+            for idx, t in enumerate(task, start=1):
+                print(f"{idx}. {t}")
+        else:
+            print("📭 No tasks yet! Add some tasks first.")
+
+    else:
+        print("❌ Invalid option! Please enter a number between 1 and 6.")
