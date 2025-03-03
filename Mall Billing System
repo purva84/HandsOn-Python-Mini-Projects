@@ -1,70 +1,61 @@
-# Take user name
-username = input("Name: ")
+import datetime
 
-# Take input for number of items
-no_of_items = int(input("\nTotal items: "))
+# Function to calculate the total price
+def calculate_total(items):
+    subtotal = sum(items[item]["quantity"] * items[item]["price"] for item in items)
+    return subtotal
 
-# Initialize total bill and item list
-bill = 0
-items = []  # List to store item details
+# Function to apply discount for premium members
+def apply_discount(subtotal, is_premium):
+    discount = 0.35 if is_premium else 0  # 35% discount for premium members
+    return subtotal * discount
 
-# Loop through each item
-for item in range(1, no_of_items + 1):
-    item_name = input("\nItem name: ")
-    quantity = int(input("Quantity: "))
-    price = float(input("Price: "))
+# Function to display the bill receipt
+def generate_bill(items, subtotal, discount, gst, final_amount, payment_method):
+    print("\n========== BILL RECEIPT ==========")
+    print(f"{'Item':<10}{'Qty':<6}{'Price':<10}{'Total'}")
+    print("-" * 35)
+    for item, details in items.items():
+        total_price = details["quantity"] * details["price"]
+        print(f"{item:<10}{details['quantity']:<6}₹{details['price']:<9}₹{total_price:.2f}")
+    print("-" * 35)
+    print(f"Subtotal: ₹{subtotal:.2f}")
+    print(f"Discount Applied: ₹{discount:.2f}")
+    print(f"GST (5%): ₹{gst:.2f}")
+    print(f"Final Amount: ₹{final_amount:.2f}")
+    print(f"Payment Method: {payment_method}")
+    print("=" * 35)
+    print("Thank you for shopping with us! 😊")
 
-    amt = quantity * price  # Calculate amount for this item
-    bill += amt  # Add to total bill
+# Main program
+items = {}
+num_items = int(input("Enter the number of items: "))
 
-    # Store item details in a dictionary and add to list
-    items.append({"name": item_name, "quantity": quantity, "price": price, "total": amt})
+for i in range(1, num_items + 1):
+    name = input(f"Enter name of item {i}: ")
+    quantity = int(input(f"Enter quantity of {name}: "))
+    price = float(input(f"Enter price of {name} (per unit): "))
+    items[name] = {"quantity": quantity, "price": price}
 
-# Apply Discount
-discount = 0
-if bill > 1000:
-    discount = (bill / 100) * 20
-elif bill > 500:
-    discount = (bill / 100) * 10
+# Checking if the user is a premium member
+is_premium = input("\nAre you a premium member? (yes/no): ").strip().lower() == "yes"
 
-# Ask for Premium Membership
-premium = input("Do you have premium? (yes/no): ").lower()
-if premium == "yes":
-    discount = (bill / 100) * 15  # Extra 15% discount for premium members
+# Choosing a payment method
+print("\nPayment Methods: 1) Cash  2) Card  3) UPI")
+payment_choice = int(input("Choose payment method (1/2/3): "))
 
-# Final Bill Calculation
-total_bill = bill - discount
+payment_methods = {1: "Cash", 2: "Card", 3: "UPI"}
+payment_method = payment_methods.get(payment_choice, "Unknown")
 
-# Payment Method
-pay = int(input("Payment methods: 1) Cash  2) Card  3) UPI: "))
+# Calculating totals
+subtotal = calculate_total(items)
+discount = apply_discount(subtotal, is_premium)
+gst = (subtotal - discount) * 0.05  # 5% GST
+final_amount = subtotal - discount + gst
 
-# Payment method selection
-payment_method = ""
-if pay == 1:
-    payment_method = "Cash"
-elif pay == 2:
-    payment_method = "Card"
-elif pay == 3:
-    payment_method = "UPI"
-else:
-    payment_method = "Unknown"
+# Generating the bill receipt
+generate_bill(items, subtotal, discount, gst, final_amount, payment_method)
 
-# Print Receipt
-print("\n====== BILL RECEIPT ======")
-print("Item\tQty\tPrice\tTotal")
-print("-----------------------------")
-
-# Loop through items and print details
-for item in items:
-    print(f"{item['name']}\t{item['quantity']}\t₹{item['price']:.2f}\t₹{item['total']:.2f}")
-
-print("-----------------------------")
-print(f"Subtotal: ₹{bill:.2f}")
-print(f"Discount: ₹{discount:.2f}")
-print(f"Final Amount: ₹{total_bill:.2f}")
-print(f"Payment Method: {payment_method}")
-print("=============================")
-print("Thank you for shopping! 😊")
 
 ==============================================================================================================================================================================================
 
