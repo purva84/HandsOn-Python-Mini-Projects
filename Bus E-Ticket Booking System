@@ -66,3 +66,34 @@ def book_ticket():
 # Start booking system
 print("Welcome to XYZ Bus Booking System!")
 book_ticket()
+
+===============================================================================================================================
+Welcome to XYZ Bus Booking System!
+
+Available Buses:
+Bus No: 101 | Destination: City A | Price: $20 | Seats Available: 10
+Bus No: 102 | Destination: City B | Price: $15 | Seats Available: 5
+
+Enter the bus number you want to book: 101
+How many tickets do you want? 2
+Total Price: $40
+
+Choose Payment Mode:
+1. Credit Card
+2. Debit Card
+3. UPI
+4. Cash
+Enter your choice (1-4): 3
+Processing UPI Payment...
+
+Enter Passenger Name: John Doe
+
+🎟️ Booking Confirmed! 🎟️
+Passenger Name: John Doe
+Bus No: 101 | Destination: City A
+Tickets: 2 | Price: $40
+Payment Mode: UPI
+Date & Time: 2025-03-03 12:45:30
+
+Do you want to book another ticket? (yes/no): no
+Thank you for booking with us! 🚍
