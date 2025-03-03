@@ -1,0 +1,92 @@
+# Step 1: Create a list of buses with available seats and fare per seat
+buses = [
+    {"bus_no": "101", "total_seats": 5, "available_seats": [1, 2, 3, 4, 5], "fare": 200, "passengers": {}},
+    {"bus_no": "102", "total_seats": 5, "available_seats": [1, 2, 3, 4, 5], "fare": 250, "passengers": {}},
+]
+
+# Step 2: Function to display available buses and seats
+def show_buses():
+    print("\nAvailable Buses and Seats:")
+    for bus in buses:
+        print(f"Bus {bus['bus_no']} - Available Seats: {bus['available_seats']} | Fare per seat: ₹{bus['fare']}")
+
+# Step 3: Function to book a ticket
+def book_ticket():
+    bus_no = input("Enter the bus number to book a ticket: ")
+    
+    for bus in buses:
+        if bus["bus_no"] == bus_no:
+            if not bus["available_seats"]:
+                print("❌ Sorry, this bus is fully booked!")
+                return
+            
+            print(f"Available seats: {bus['available_seats']}")
+            seat_no = int(input("Enter the seat number to book: "))
+            
+            if seat_no in bus["available_seats"]:
+                name = input("Enter your name: ")
+                bus["available_seats"].remove(seat_no)
+                bus["passengers"][seat_no] = name
+                print(f"✅ Ticket booked! Bus {bus_no}, Seat {seat_no}, Passenger: {name}")
+                print(f"Total Fare: ₹{bus['fare']}")
+            else:
+                print("❌ Invalid seat number or already booked!")
+            return
+    
+    print("❌ Bus not found!")
+
+# Step 4: Function to cancel a booking
+def cancel_ticket():
+    bus_no = input("Enter the bus number to cancel a ticket: ")
+    
+    for bus in buses:
+        if bus["bus_no"] == bus_no:
+            seat_no = int(input("Enter the seat number to cancel: "))
+            
+            if 1 <= seat_no <= bus["total_seats"] and seat_no not in bus["available_seats"]:
+                bus["available_seats"].append(seat_no)
+                passenger = bus["passengers"].pop(seat_no, "Unknown")
+                print(f"✅ Ticket cancelled! Bus {bus_no}, Seat {seat_no}, Passenger: {passenger}")
+            else:
+                print("❌ Invalid cancellation request!")
+            return
+    
+    print("❌ Bus not found!")
+
+# Step 5: Function to show passengers
+def show_passengers():
+    print("\nPassenger List:")
+    for bus in buses:
+        print(f"\nBus {bus['bus_no']}:")
+        if bus["passengers"]:
+            for seat, name in bus["passengers"].items():
+                print(f"  - Seat {seat}: {name}")
+        else:
+            print("  No bookings yet.")
+
+# Step 6: Main loop to interact with the user
+while True:
+    print("\n=== Bus E-Ticket Booking System ===")
+    print("1. View Buses")
+    print("2. Book Ticket")
+    print("3. Cancel Ticket")
+    print("4. View Passenger List")
+    print("5. Exit")
+    
+    choice = input("Enter your choice: ")
+    
+    if choice == "1":
+        show_buses()
+    elif choice == "2":
+        book_ticket()
+    elif choice == "3":
+        cancel_ticket()
+    elif choice == "4":
+        show_passengers()
+    elif choice == "5":
+        confirm = input("Are you sure you want to exit? (yes/no): ").lower()
+        if confirm == "yes":
+            print("Thank you for using our service! 🚍")
+            break
+    else:
+        print("Invalid choice! Please try again.")
