@@ -1,0 +1,93 @@
+import datetime
+
+# Expense Tracker - Enhanced Version
+expenses = []  # List to store all expenses
+
+def add_expense():
+    """Function to add an expense"""
+    category = input("Enter expense category: ")
+    amount = float(input("Enter amount: ₹"))
+    date = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")  # Get current date & time
+
+    # Create dictionary for the expense
+    expense = {"Category": category, "Amount": amount, "Date": date}
+    
+    # Add to expenses list
+    expenses.append(expense)
+    print("\n✅ Expense added successfully!\n")
+
+def view_expenses():
+    """Function to display all expenses"""
+    if not expenses:
+        print("\n🚫 No expenses recorded yet!\n")
+        return
+    
+    print("\n💰 Expense Summary:")
+    for idx, expense in enumerate(expenses, 1):
+        print(f"{idx}. Category: {expense['Category']}, Amount: ₹{expense['Amount']}, Date: {expense['Date']}")
+    
+    # Calculate total expenses
+    total = sum(exp["Amount"] for exp in expenses)
+    print(f"\n🔹 Total Expenses: ₹{total}\n")
+
+def delete_expense():
+    """Function to delete an expense"""
+    if not expenses:
+        print("\n🚫 No expenses to delete!\n")
+        return
+    
+    view_expenses()
+    
+    try:
+        choice = int(input("Enter the expense number to delete: ")) - 1
+        if 0 <= choice < len(expenses):
+            deleted_expense = expenses.pop(choice)
+            print(f"\n🗑️ Deleted Expense: {deleted_expense['Category']} - ₹{deleted_expense['Amount']}\n")
+        else:
+            print("\n❌ Invalid choice! Try again.\n")
+    except ValueError:
+        print("\n❌ Please enter a valid number.\n")
+
+def category_summary():
+    """Function to show total expenses per category"""
+    if not expenses:
+        print("\n🚫 No expenses recorded yet!\n")
+        return
+
+    category_totals = {}
+    for expense in expenses:
+        category = expense["Category"]
+        category_totals[category] = category_totals.get(category, 0) + expense["Amount"]
+
+    print("\n📊 Expense Summary by Category:")
+    for category, total in category_totals.items():
+        print(f"🔹 {category}: ₹{total}")
+
+def main():
+    
+    print("\n===== 💰 Expense Tracker Menu =====")
+    print("1️⃣ Add Expense")
+    print("2️⃣ View Expenses")
+    print("3️⃣ Delete an Expense")
+    print("4️⃣ Expense Summary by Category")
+    print("5️⃣ Exit")
+
+    while True:
+        choice = input("\nEnter your choice: ")
+
+        if choice == "1":
+            add_expense()
+        elif choice == "2":
+            view_expenses()
+        elif choice == "3":
+            delete_expense()
+        elif choice == "4":
+            category_summary()
+        elif choice == "5":
+            print("\n👋 Exiting... Thank you for using Expense Tracker!\n")
+            break
+        else:
+            print("\n❌ Invalid choice! Please select a valid option.\n")
+
+# Run the program
+main()
