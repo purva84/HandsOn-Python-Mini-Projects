@@ -1,50 +1,85 @@
-task = []
+tasks = []
+completed_tasks = []  # Renamed to avoid conflict
 
-print("=========To Do List Manager=========")
-print("\n Choose your option: \n1.Add Task\n2.View Task\n3.Remove Task\n4.Clear All Task\n5.Sort List\n6.Exit")
+def add_task():
+    new_task = input("Enter a new task: ").strip()
+    tasks.append(new_task)
+    print("✅ Task added successfully!")
 
-while True: 
-    option = int(input("\nEnter you option: "))
-    if option == 1:
-        taskname = input("Enter you Task: ").lower()
-        task.append(taskname)
-        print("Task has been added Successfully!")
-        
-    elif option == 2:
-        if task:
-            print("\n Your To Do List")
-            for idx, t in enumerate(task,start = 1):
-                print(f"{idx}.{t}")
-        else:
-            print("Your list is empty")
-            
-    elif option == 3:
-        if task:
-            removetask = input("Which task do you want to remove? - ").lower()
-            if removetask in task:
-                task.remove(removetask)
-                print(f"{removetask} has been removed successfully")
-            else:
-                print("Task not found")
-        else:
-            print("Your list is empty")
-            
-    elif option == 4:
-        if task:
-            task.clear()
-            print("Your all task is been cleared!")
-        else:
-            print("Your list is empty")
-        
-    elif option == 5:
-        task.sort()
-        print("Your list is Sorted")
-        for idx,t in enumerate(task,start = 1):
-            print(f"{idx}.{t}")
-        
-    elif option == 6:
-         print("Exiting the To-Do List Manager. See you next time!")
-         break
-     
+def view_task():
+    if not tasks:
+        print("📌 No pending tasks!")
     else:
-        print("Enter valid option")
+        print("\n📋 Your To-Do List:")
+        for idx, task in enumerate(tasks, start=1):
+            print(f"{idx}. {task}")
+
+def mark_completed():
+    if not tasks:
+        print("📌 No tasks available to mark as completed.")
+        return
+    
+    view_task()
+    try:
+        which_task = int(input("Enter task number to mark as completed: ")) - 1
+        if 0 <= which_task < len(tasks):
+            completed_tasks.append(tasks.pop(which_task))
+            print("✅ Task marked as completed!")
+        else:
+            print("❌ Invalid task number.")
+    except ValueError:
+        print("❌ Please enter a valid number.")
+
+def remove_task():
+    if not tasks:
+        print("📌 No tasks available to remove.")
+        return
+    
+    view_task()
+    try:
+        which_remove = int(input("Enter task number to remove: ")) - 1
+        if 0 <= which_remove < len(tasks):
+            removed_task = tasks.pop(which_remove)
+            print(f"❌ Task '{removed_task}' removed successfully!")
+        else:
+            print("❌ Invalid task number.")
+    except ValueError:
+        print("❌ Please enter a valid number.")
+
+def view_completed():
+    if not completed_tasks:
+        print("📌 No completed tasks yet.")
+    else:
+        print("\n✅ Completed Tasks:")
+        for i, task in enumerate(completed_tasks, start=1):
+            print(f"{i}. {task}")
+
+# Display menu
+print("------------------------------------------")
+print("\t\t📋 TO-DO LIST")
+print("------------------------------------------")
+print("1️⃣ Add a new task")
+print("2️⃣ View all tasks")
+print("3️⃣ Mark a task as completed")
+print("4️⃣ Remove a task")
+print("5️⃣ View completed tasks")
+print("6️⃣ Exit")
+print("------------------------------------------")
+
+while True:
+    choose = input("\nChoose an option: ").strip()
+    if choose == "1":
+        add_task()
+    elif choose == "2":
+        view_task()
+    elif choose == "3":
+        mark_completed()
+    elif choose == "4":
+        remove_task()
+    elif choose == "5":
+        view_completed()
+    elif choose == "6":
+        print("👋 Thank you for using the To-Do List!")
+        break
+    else:
+        print("❌ Please choose a valid option (1-6).")
