@@ -1,0 +1,56 @@
+# 🏫 School Bag Organizer Program
+
+# Step 1: Create a dictionary with categories
+bag_items = {
+    "Stationery": ["Notebook", "Pen", "Pencil"],
+    "Food": ["Lunchbox", "Water Bottle"],
+    "Electronics": ["Calculator"]
+}
+
+# Function to display the school bag contents
+def display_bag():
+    print("\n🎒 Your School Bag Contains:")
+    for category, items in bag_items.items():
+        print(f"{category}: {', '.join(items)}")
+    print("-" * 30)
+
+# Step 2: Print each item with its position
+print("📌 Items in your bag:")
+all_items = sum(bag_items.values(), [])  # Flatten dictionary values into a list
+for index, item in enumerate(all_items, start=1):
+    print(f"{index}th item: {item}")
+
+# Step 3: Check for a missing item
+item_to_check = input("\n🔍 Enter an item to check: ")
+found = any(item_to_check in items for items in bag_items.values())
+if found:
+    print("✅ Item is packed.")
+else:
+    print("❌ Oops! You forgot this item.")
+
+# Step 4: Add a new item
+new_item = input("\n➕ Enter an item to add: ")
+category = input("📂 Which category does it belong to? (Stationery, Food, Electronics): ")
+if category in bag_items:
+    bag_items[category].append(new_item)
+else:
+    bag_items[category] = [new_item]
+print("✅ Item added successfully!")
+
+# Step 5: Remove an item
+item_to_remove = input("\n🗑 Enter an item to remove: ")
+for category, items in bag_items.items():
+    if item_to_remove in items:
+        items.remove(item_to_remove)
+        print(f"✅ {item_to_remove} removed successfully!")
+        break
+else:
+    print("❌ Item not found in your bag.")
+
+# Step 6: Count items in each category
+print("\n📊 Category-wise item count:")
+for category, items in bag_items.items():
+    print(f"{category}: {len(items)} items")
+
+# Display updated bag
+display_bag()
