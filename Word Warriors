@@ -1,0 +1,52 @@
+import random  
+import string  
+
+print("🏹🏹🏹 Word Battle 🏹🏹🏹")  
+name1 = input("\nEnter player 1 name: ")  
+name2 = input("Enter player 2 name: ")  
+total_point1 = 0  
+total_point2 = 0  
+
+def calculate_points(word):
+    """Calculate points based on the length of the word."""
+    return len(word) * 10
+
+game_active = True
+
+while game_active:  
+    capital = random.choice(string.ascii_uppercase)  
+    print(f"\nThe letter is: {capital}")  
+    
+    # Player 1's turn
+    ans1 = input(f"{name1}, your answer: ").capitalize()  
+    if ans1.lower() == "stop":  
+        print("Game stopped.")  
+        break  
+    point1 = calculate_points(ans1)
+
+    # Player 2's turn  
+    ans2 = input(f"{name2}, your answer: ").capitalize()  
+    if ans2.lower() == "stop":  
+        print("Game stopped.")  
+        break  
+    point2 = calculate_points(ans2)
+
+    # Add points  
+    print(f"{name1} got {point1} points")
+    print(f"{name2} got {point2} points")
+    
+    total_point1 += point1  
+    total_point2 += point2  
+
+# Display Score Card  
+print("\n🏅 Score Card 🏅")  
+print(f"{name1} received: {total_point1} points")    
+print(f"{name2} received: {total_point2} points")  
+
+# Winner declaration with tie handling  
+if total_point1 > total_point2:  
+    print(f"\n🏆 {name1} Wins!!!")  
+elif total_point1 < total_point2:  
+    print(f"\n🏆 {name2} Wins!!!")  
+else:  
+    print("\n🤝 It's a Tie!")  
