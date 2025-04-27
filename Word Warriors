@@ -50,3 +50,51 @@ elif total_point1 < total_point2:
     print(f"\n🏆 {name2} Wins!!!")  
 else:  
     print("\n🤝 It's a Tie!")  
+
+
+
+2nd program============================================================================================
+
+import random 
+import string
+
+print("="*8,"Word Battle","="*8)
+name1 = input("Enter name of player 1: ")
+name2 = input("Enter name of player 2: ")
+total_point1 = 0
+total_point2 = 0
+
+count = 0
+
+while count<6:
+    letter = random.choice(string.ascii_uppercase)
+    print(f"\nThe letter is: {letter}")
+    count +=1
+    
+    ans1 = input(f"{name1}, your answer: ").capitalize()
+    point1 = len(ans1)*10
+    total_point1+= point1
+    
+    ans2 = input(f"{name2}, your answer: ").capitalize()
+    point2 = len(ans2)*10
+    total_point2+= point2
+    
+    if count == 5:
+        print("\n","="*8,"Score Card","="*8)
+        print(f"\n{name1} received:{total_point1} points")
+        print(f"{name2} received:{total_point2} points")
+        
+        if total_point1 > total_point2:
+            print(f"\n{name1} is the winner!")
+        elif total_point2 > total_point1:
+            print(f"\n{name2} is the winner!")
+        else:
+            print(f"\n It\'s a Tie!!!")
+        break
+    
+    
+    
+
+
+
+
