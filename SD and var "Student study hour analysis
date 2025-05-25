@@ -1,0 +1,50 @@
+📊 Program: "Student Study Hours Analysis"
+
+You collected data on how many hours a student studies each day over a week. Now, you want to know:
+
+* Total study time
+* Average study time
+* Variance and standard deviation (to see how consistent they are)
+
+---
+
+## 💻 Python Code
+
+```python
+import statistics
+
+# Hours studied each day for a week
+study_hours = [2, 3, 4, 2.5, 3.5, 4.5, 5]  # sample data (can be user input too)
+
+# Calculations
+total = sum(study_hours)
+average = statistics.mean(study_hours)
+variance = statistics.variance(study_hours)
+std_dev = statistics.stdev(study_hours)
+
+# Output
+print("📘 Study Hours Analysis (1 Week)\n")
+print(f"Daily Study Hours: {study_hours}")
+print(f"Total Study Hours: {total} hrs")
+print(f"Average Daily Study Time: {average:.2f} hrs")
+print(f"Variance: {variance:.2f}")
+print(f"Standard Deviation: {std_dev:.2f}")
+```
+
+---
+
+## 🔍 Real-World Use Case
+
+* A low standard deviation = consistent study habits
+* A high standard deviation = irregular study times
+* Schools, coaching centers, or productivity apps can use this kind of logic
+
+---
+
+## 🧠 What You Learn
+
+* Use of statistics.mean(), variance(), and stdev()
+* Real-world interpretation of variation in behavior
+* Python list operations and summary statistics
+
+
