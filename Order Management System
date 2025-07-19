@@ -1,0 +1,76 @@
+**Order Management System** for **Custom Creative Banners & Decor** business. 🎨🧾
+
+### 🎨💻 Python Code: Custom Creative Banners & Decor – Order System
+
+# Step 1: Greet the user and start the system
+print("🎨 Welcome to Creative Banners & Decor!")
+print("🧾 Let's place your custom order.\n")
+
+# Step 2: Display the product catalog with prices
+products = {
+    "Birthday Banner": 150,
+    "Nameplate": 100,
+    "Wall Hanging": 200,
+    "Festive Decor Kit": 300
+}
+
+print("📦 Available Products:")
+for product, price in products.items():
+    print(f"- {product}: ₹{price}")
+
+# Step 3: Get customer details
+customer_name = input("\n👤 Enter your name: ")
+
+# Step 4 to 7: Take orders in a loop and validate products
+orders = []
+while True:
+    product = input("\n🛒 Enter product name to order (or type 'Done' to finish): ").title()  #title()	Capitalizes the first letter of each word	"birthday banner"	"Birthday Banner"
+    
+    if product == 'Done':
+        break
+
+    if product not in products:
+        print("❌ Product not found. Please choose from the catalog.")
+        continue
+
+    quantity = int(input(f"🔢 How many '{product}' do you want? "))
+    total_price = quantity * products[product]
+    
+    orders.append({
+        "product": product,
+        "quantity": quantity,
+        "price": products[product],
+        "total": total_price
+    })
+    print(f"✅ Added {quantity} x {product} to your order.")
+
+# Step 8: Ask for delivery option
+print("\n🚚 Choose your delivery option:")
+print("1. Standard Delivery (₹30)")
+print("2. Express Delivery (₹70)")
+delivery_choice = input("Enter 1 or 2: ")
+
+if delivery_choice == '1':
+    delivery_type = "Standard"
+    delivery_charge = 30
+elif delivery_choice == '2':
+    delivery_type = "Express"
+    delivery_charge = 70
+else:
+    print("⚠️ Invalid choice. Defaulting to Standard Delivery.")
+    delivery_type = "Standard"
+    delivery_charge = 30
+
+# Step 9–11: Show order summary and calculate total
+print(f"\n🧾 Order Summary for {customer_name}")
+print("-" * 40)
+grand_total = 0
+for order in orders:
+    print(f"{order['quantity']} x {order['product']} @ ₹{order['price']} = ₹{order['total']}")
+    grand_total += order['total']
+
+print("-" * 40)
+print(f"Delivery: {delivery_type} (₹{delivery_charge})")
+grand_total += delivery_charge
+print(f"💰 Total Amount Payable: ₹{grand_total}")
+print("🎉 Thank you for shopping with Creative Banners & Decor!")
