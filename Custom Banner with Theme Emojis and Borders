@@ -1,0 +1,24 @@
+ Custom Banner with Theme Emojis and Borders
+
+themes = {
+    "BIRTHDAY": "🎉🎂🎈",
+    "WEDDING": "💍💒❤️",
+    "NEW YEAR": "🎆🥳🎇",
+    "CONGRATS" : "🎊🏆👏",
+    "GRADUATION": "🎓📜🎉"
+}
+
+message = input("Enter your custom banner text: ").upper()
+
+decoration = "✨🌟✨"  # Default
+for keyword in themes:
+    if keyword in message:
+        decoration = themes[keyword]
+        break
+
+banner_text = f"{decoration} {message} {decoration}"
+banner_length = len(message) + 50
+#top border
+print("\n"+"*"*banner_length)
+print(f"* {banner_text.center(banner_length - 30)} *")  # Centered line
+print("*" * banner_length)  # Bottom border
