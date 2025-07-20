@@ -1,0 +1,43 @@
+Banner Size & Cost Estimator Tool
+
+def estimate_cost(width, height, material_type, message):
+    # Base area and character count
+    area = width * height
+    char_count = len(message)
+
+    # Define cost per square inch and per character based on material
+    material_rates = {
+        "paper": {"area_rate": 0.5, "char_rate": 0.2},
+        "fabric": {"area_rate": 1.2, "char_rate": 0.4},
+        "vinyl": {"area_rate": 1.8, "char_rate": 0.5}
+    }
+
+    # Check if valid material
+    if material_type not in material_rates:
+        return "Invalid material. Choose from paper, fabric, or vinyl."
+
+    rates = material_rates[material_type]
+    area_cost = area * rates["area_rate"]
+    text_cost = char_count * rates["char_rate"]
+
+    total_cost = area_cost + text_cost
+
+    return round(total_cost, 2)
+
+
+# --- User Input Section ---
+print("🎨 Welcome to the Banner Cost Estimator 🎨\n")
+
+# Get user inputs
+try:
+    width = float(input("Enter banner width (in inches): "))
+    height = float(input("Enter banner height (in inches): "))
+    material = input("Enter material type (paper/fabric/vinyl): ").lower()
+    message = input("Enter the message to print on banner: ")
+
+    # Calculate and show estimate
+    final_cost = estimate_cost(width, height, material, message)
+    print(f"\n🧾 Estimated Cost: ₹{final_cost}")
+
+except ValueError:
+    print("Please enter valid numbers for width and height.")
