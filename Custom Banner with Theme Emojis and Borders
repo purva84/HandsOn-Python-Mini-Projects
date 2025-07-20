@@ -1,4 +1,15 @@
- Custom Banner with Theme Emojis and Borders
+# Custom Banner with Theme Emojis and Borders
+# String Alignment
+🔧 1. .center(width) - Centers the string in a field of given width.
+🔧 2. .ljust(width) - Left aligns the string and pads spaces to the right.
+🔧 3. .rjust(width) - Right aligns the string and pads spaces to the left.
+🔧 4. format() method with alignment specifiers: - Inside an f-string or str.format(), you can also control alignment:
+Syntax	Meaning	Example
+:<width>	Left align	
+:>width	Right align	
+:^width	Center align
+
+******************************************************************************************************************************************************
 
 themes = {
     "BIRTHDAY": "🎉🎂🎈",
